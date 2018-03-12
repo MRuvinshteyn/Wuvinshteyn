@@ -1,14 +1,20 @@
+//svg variable
 var svg = document.getElementById("vimage");
 
+
+//variables used for animating
 var frame;
 var anim = true;
 var interval;
 
+
+//variables used for drawing
 var rad = 10;
 var color = "#000000";
 
 var circles = [];
 
+//create and return an instance of a circle
 var createCircle = function(){
     var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     var ret = {
@@ -40,6 +46,7 @@ var createCircle = function(){
     return ret;
 }
 
+//create a new circle upon clicking
 var clicked = function(e){
     if (anim) {
         interval = setInterval(animate, 20);
@@ -47,10 +54,10 @@ var clicked = function(e){
     }
     if (e.target == this){
         circles.push(createCircle());
-        // dot.display();
     }
 }
 
+//animate the created circle
 var animate = function(){
     circles.forEach(function(c){
         c.move();
@@ -60,6 +67,7 @@ var animate = function(){
     })
 }
 
+//clear the svg
 var clearSVG = function(){
     clearInterval(interval);
     circles = [];
@@ -69,5 +77,7 @@ var clearSVG = function(){
     anim = true;
 }
 
+
+//add event listeners
 svg.addEventListener("click",clicked);
 document.getElementById("csvg").addEventListener("click",clearSVG);
